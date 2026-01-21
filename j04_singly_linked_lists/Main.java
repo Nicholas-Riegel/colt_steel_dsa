@@ -26,22 +26,24 @@ public class Main {// this has to be at top to use 'java filename.java'
         // first.next = new Node(2);
         // first.next.next = new Node(3);
 
-        // System.out.println(first.val);
-        // System.out.println(first.next.val);
-        // System.out.println(first.next.next.val);
-
         SLL<String> list0 = new SLL<String>();
         list0.push_end("Hi");
         list0.push_end("there!");
-        System.out.println(list0.pop_end());
-        System.out.println(list0.pop_end());
-        System.out.println(list0);
+        
+        try {
+            System.out.println(list0.setAt(0, "Hey"));  
+        } catch (IndexOutOfBoundsException | IllegalStateException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        
     }
 }
 
 // Start by making a node
 // piece of data - val
 // reference to the next node - next
+
+// Node for singly linked list
 class Node<T>{
     
     protected T val;
@@ -53,6 +55,7 @@ class Node<T>{
     }
 }
 
+// Singly linked list
 class SLL<T>{
     
     protected int length;
@@ -65,6 +68,7 @@ class SLL<T>{
         this.tail = null;
     }
 
+    // Add to end
     public SLL<T> push_end(T val){
 
         Node<T> newNode = new Node<T>(val);
@@ -76,17 +80,24 @@ class SLL<T>{
             this.tail.next = newNode;
             this.tail = this.tail.next;
         }
+        
         this.length++;
+        
         return this;
     }// Ot(1)
 
+    // Remove from end
     public T pop_end(){
         
+        // Guard
+        if (this.head == null){
+            throw new IllegalStateException("List is empty.");
+        }
+
+        // Main functionality
         T value = null;
 
-        if (this.head == null){
-            value = null;
-        } else if (this.head == this.tail){
+        if (this.head == this.tail){
             value = this.head.val;
             this.head = null;
             this.tail = null;
@@ -105,8 +116,11 @@ class SLL<T>{
         return value;
     }// Ot(n)
 
+    // Add to beginning
     public SLL<T> push_start(T val){
+        
         Node<T> newNode = new Node<T>(val);
+        
         if (this.head == null){
             this.head = newNode;
             this.tail = this.head;
@@ -116,25 +130,80 @@ class SLL<T>{
             this.head = newNode;
             this.length++;
         }
+        
         return this;
     } // Ot(1)
 
+    // Remove from beginning
     public T pop_start(){
-        T value = null;
-
-        if (this.head != null){
-            value = this.head.val;
-            if (this.head != this.tail){
-                this.head = this.head.next;
-            } else {
-                this.head = null;
-                this.tail = null;
-            }
-            this.length--;
+        
+        // Guard
+        if (this.head == null){
+            throw new IllegalStateException("List is empty.");
         }
+
+        // Main functionality
+        T value = this.head.val;
+        
+        if (this.head != this.tail){
+            this.head = this.head.next;
+        } else {
+            this.head = null;
+            this.tail = null;
+        }
+        
+        this.length--;
+
         return value;
     } // Ot(1)
 
+    // Get at
+    public T getAt(int i){
+        
+        // Guards
+        if (this.length == 0){
+            throw new IllegalStateException("List is empty.");
+        } 
+        if (i < 0 || i >= this.length){
+            throw new IndexOutOfBoundsException("Index out of bounds: " + i + ". Valid range: 0 to " + (this.length - 1));
+        }
+        
+        // Main functionality
+        Node<T> current = this.head;
+        while (i > 0){
+            current = current.next;
+            i--;
+        }
+        return current.val;
+    } // Ot(n)
+
+    // Set at
+    public SLL<T> setAt(int i, T value){
+
+        // Guard
+        if (this.length == 0){
+            throw new IllegalStateException("List is empty.");
+        } 
+        if (i < 0 || i >= this.length){
+            throw new IndexOutOfBoundsException("Index out of bounds: " + i + ". Valid range: 0 to " + (this.length - 1));
+        }
+
+        // Main functionality
+        Node<T> current = this.head;
+        while (i > 0){
+            current = current.next;
+            i--;
+        }
+        current.val = value;
+
+        return this;
+    }
+
+    // Insert at
+    // Remove at
+    // Reverse
+
+    // Convert list to String for printing
     @Override
     public String toString(){
 
