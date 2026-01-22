@@ -28,10 +28,13 @@ public class Main {// this has to be at top to use 'java filename.java'
 
         SLL<String> list0 = new SLL<String>();
         list0.push_end("Hi");
-        list0.push_end("there!");
+        list0.push_end("there");
+        list0.push_end("you");
+        list0.push_end("beautiful");
+        list0.push_end("being");
         
         try {
-            System.out.println(list0.setAt(0, "Hey"));  
+            System.out.println(list0.reverse());  
         } catch (IndexOutOfBoundsException | IllegalStateException e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -200,8 +203,107 @@ class SLL<T>{
     }
 
     // Insert at
+    public SLL<T> insertAt(int i, T value){
+
+        if (this.length == 0 || i < 1){
+            push_start(value);
+        } else if (i >= this.length){
+            push_end(value);
+        } else {
+            Node<T> newNode = new Node<T>(value);
+            Node<T> current = this.head;
+            while (i > 1){
+                current = current.next;
+                i--;
+            }
+            newNode.next = current.next;
+            current.next = newNode;
+            this.length++;
+        }
+
+        return this;
+    }
+    
     // Remove at
+    public T removeAt(int i){
+        
+        // Guard
+        if (this.length == 0){
+            throw new IllegalStateException("List is empty.");
+        } 
+        if (i < 0 || i >= this.length){
+            throw new IndexOutOfBoundsException("Index out of bounds: " + i + ". Valid range: 0 to " + (this.length - 1));
+        }
+        
+        // Main functionality
+        T value = null;
+        if (i == 0){
+            value = pop_start();
+        } else if (i == this.length - 1){
+            value = pop_end();
+        } else {
+            Node<T> current = this.head;
+            while (i > 1){
+                current = current.next;
+                i--;
+            }
+            value = current.next.val;
+            current.next = current.next.next;
+            this.length--;
+        }
+
+        return value;
+    }
+
     // Reverse
+    // head              tail
+    // 13 -> 27 -> 32 -> 71
+    // tail
+    // prev  cur   next
+    // 13 -> 27 -> 32 -> 71
+    public SLL<T> reverse(){
+        
+        // Guard
+        if (this.head == null) return this; // Length = 0
+        if (this.head == this.tail) return this; // Length = 1
+
+        // Main functionality
+        // Swap head and tail
+        Node<T> temp = this.head;
+        this.head = this.tail;
+        this.tail = temp;
+
+        // Set prev, current and next 
+        Node<T> prev = this.tail;
+        Node<T> current = this.tail.next;
+        Node<T> next = this.tail.next.next; // Only need this for Case 2
+        
+        // Case 1. length = 2
+        if (this.length == 2){
+            
+            current.next = prev;    
+            this.tail.next = null;
+        }
+        
+        // Case 2. length > 2
+        if (this.length > 2){
+
+            while(next.next != null){
+                current.next = prev;
+                prev = current;
+                current = next;
+                next = next.next;
+            }
+            
+            // For end case when next.next == null
+            current.next = prev;
+            next.next = current;
+            
+            this.tail.next = null;
+        }
+
+        return this;
+    }
 
     // Convert list to String for printing
     @Override
