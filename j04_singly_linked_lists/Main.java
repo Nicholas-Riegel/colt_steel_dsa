@@ -256,36 +256,28 @@ class SLL<T>{
     }
 
     // Reverse
-    // head              tail
-    // 13 -> 27 -> 32 -> 71
-    // tail
     // prev  cur   next
     // 13 -> 27 -> 32 -> 71
+    //       prev  cur   next
     public SLL<T> reverse(){
-        
+
         // Guard
-        if (this.head == null) return this; // Length = 0
-        if (this.head == this.tail) return this; // Length = 1
+        if (this.head == null) return this;
+        if (this.head == this.tail) return this;
 
         // Main functionality
-        // Swap head and tail
-        Node<T> temp = this.head;
-        this.head = this.tail;
-        this.tail = temp;
+        Node<T> prev = this.head;
+        Node<T> current = this.head.next;
+        Node<T> next = this.head.next.next; // only needed for length > 2
 
-        // Set prev, current and next 
-        Node<T> prev = this.tail;
-        Node<T> current = this.tail.next;
-        Node<T> next = this.tail.next.next; // Only need this for Case 2
-        
-        // Case 1. length = 2
         if (this.length == 2){
-            
-            current.next = prev;    
-            this.tail.next = null;
+
+            current.next = prev;
+            prev.next = null;
+            this.head = current;
+            this.tail = prev;
         }
-        
-        // Case 2. length > 2
+
         if (this.length > 2){
 
             while(next.next != null){
@@ -294,17 +286,16 @@ class SLL<T>{
                 current = next;
                 next = next.next;
             }
-            
-            // For end case when next.next == null
             current.next = prev;
             next.next = current;
-            
+            this.tail = this.head;
+            this.head = next;
             this.tail.next = null;
         }
 
         return this;
     }
-
+    
     // Convert list to String for printing
     @Override
     public String toString(){
