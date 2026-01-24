@@ -16,6 +16,7 @@
 // Insertion and deletion can be expensive
 // Can quickly be accessed at a specific index
 
+
 import java.util.ArrayList;
 
 public class Main {// this has to be at top to use 'java filename.java'
@@ -97,7 +98,7 @@ class SLL<T>{
             throw new IllegalStateException("List is empty.");
         }
 
-        // Main functionality
+        // Main
         T value = null;
 
         if (this.head == this.tail){
@@ -145,7 +146,7 @@ class SLL<T>{
             throw new IllegalStateException("List is empty.");
         }
 
-        // Main functionality
+        // Main
         T value = this.head.val;
         
         if (this.head != this.tail){
@@ -171,7 +172,7 @@ class SLL<T>{
             throw new IndexOutOfBoundsException("Index out of bounds: " + i + ". Valid range: 0 to " + (this.length - 1));
         }
         
-        // Main functionality
+        // Main
         Node<T> current = this.head;
         while (i > 0){
             current = current.next;
@@ -191,7 +192,7 @@ class SLL<T>{
             throw new IndexOutOfBoundsException("Index out of bounds: " + i + ". Valid range: 0 to " + (this.length - 1));
         }
 
-        // Main functionality
+        // Main
         Node<T> current = this.head;
         while (i > 0){
             current = current.next;
@@ -200,7 +201,7 @@ class SLL<T>{
         current.val = value;
 
         return this;
-    }
+    }// Ot(n)
 
     // Insert at
     public SLL<T> insertAt(int i, T value){
@@ -222,7 +223,7 @@ class SLL<T>{
         }
 
         return this;
-    }
+    }// Ot(n)
     
     // Remove at
     public T removeAt(int i){
@@ -235,7 +236,7 @@ class SLL<T>{
             throw new IndexOutOfBoundsException("Index out of bounds: " + i + ". Valid range: 0 to " + (this.length - 1));
         }
         
-        // Main functionality
+        // Main
         T value = null;
         if (i == 0){
             value = pop_start();
@@ -253,46 +254,66 @@ class SLL<T>{
         }
 
         return value;
-    }
+    }// Ot(n)
 
-    // Reverse
-    // prev  cur   next
+    // Reverse (my solution)
+    // prev  mid   next
     // 13 -> 27 -> 32 -> 71
-    //       prev  cur   next
+    //       prev  mid   next
+    // public SLL<T> reverse(){
+
+    //     // Guard
+    //     if (this.head == null) return this;
+    //     if (this.head == this.tail) return this;
+
+    //     // Main 
+    //     Node<T> prev = this.head;
+    //     Node<T> mid = this.head.next;
+    //     Node<T> next = this.head.next.next; // only needed for length > 2
+
+    //     if (this.length == 2){
+
+    //         mid.next = prev;
+    //         prev.next = null;
+    //         this.head = mid;
+    //         this.tail = prev;
+    //     }
+
+    //     if (this.length > 2){
+
+    //         while(next.next != null){
+    //             mid.next = prev;
+    //             prev = mid;
+    //             mid = next;
+    //             next = next.next;
+    //         }
+    //         mid.next = prev;
+    //         next.next = mid;
+    //         this.tail = this.head;
+    //         this.head = next;
+    //         this.tail.next = null;
+    //     }
+
+    //     return this;
+    // }// Ot(n)
+
+    // Reverse (elegant solution)
     public SLL<T> reverse(){
 
-        // Guard
         if (this.head == null) return this;
-        if (this.head == this.tail) return this;
 
-        // Main functionality
-        Node<T> prev = this.head;
-        Node<T> current = this.head.next;
-        Node<T> next = this.head.next.next; // only needed for length > 2
+        Node<T> prev = null;
+        Node<T> current = this.head;
 
-        if (this.length == 2){
-
+        while (current != null){
+            Node<T> temp = current.next;
             current.next = prev;
-            prev.next = null;
-            this.head = current;
-            this.tail = prev;
+            prev = current;
+            current = temp;
         }
-
-        if (this.length > 2){
-
-            while(next.next != null){
-                current.next = prev;
-                prev = current;
-                current = next;
-                next = next.next;
-            }
-            current.next = prev;
-            next.next = current;
-            this.tail = this.head;
-            this.head = next;
-            this.tail.next = null;
-        }
-
+        this.tail = this.head;
+        this.head = prev;
+        this.tail.next = null;
         return this;
     }
     
@@ -308,5 +329,5 @@ class SLL<T>{
             current = current.next;
         }
         return arrlist.toString();
-    }
+    }// Ot(n)
 }
