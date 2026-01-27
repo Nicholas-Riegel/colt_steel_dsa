@@ -256,6 +256,22 @@ class SLL<T>{
         return value;
     }// Ot(n)
 
+    // Convert list to String for printing
+    @Override
+    public String toString(){
+
+        ArrayList<T> arrlist = new ArrayList<>();
+        Node<T> current = this.head;
+
+        while (current != null){
+            arrlist.add(current.val);
+            current = current.next;
+        }
+        return arrlist.toString();
+    }// Ot(n)
+
+
+
     // Reverse (my solution)
     // prev  mid   next
     // 13 -> 27 -> 32 -> 71
@@ -301,33 +317,22 @@ class SLL<T>{
     public SLL<T> reverse(){
 
         if (this.head == null) return this;
+        if (this.head == this.tail) return this;
 
         Node<T> prev = null;
-        Node<T> current = this.head;
+        Node<T> mid = this.head;
+        Node<T> next = null;
 
-        while (current != null){
-            Node<T> temp = current.next;
-            current.next = prev;
-            prev = current;
-            current = temp;
+        while (mid != null){
+            next = mid.next;
+            mid.next = prev;
+            prev = mid;
+            mid = next;
         }
+
         this.tail = this.head;
         this.head = prev;
-        this.tail.next = null;
+        
         return this;
     }
-    
-    // Convert list to String for printing
-    @Override
-    public String toString(){
-
-        ArrayList<T> arrlist = new ArrayList<>();
-        Node<T> current = this.head;
-
-        while (current != null){
-            arrlist.add(current.val);
-            current = current.next;
-        }
-        return arrlist.toString();
-    }// Ot(n)
 }
