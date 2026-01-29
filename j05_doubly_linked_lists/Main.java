@@ -5,12 +5,12 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
         DLL<String> dll_0 = new DLL<String>();
-        // dll_0.add_end("Hi");        
-        // dll_0.add_end("there");        
-        // dll_0.add_end("you");        
-        // dll_0.add_end("beautiful");        
-        // dll_0.add_end("thing");
-        System.out.println(dll_0.removeAt(0));
+        dll_0.add_end("Hi");        
+        dll_0.add_end("there");        
+        dll_0.add_end("you");        
+        dll_0.add_end("beautiful");        
+        dll_0.add_end("thing");
+        System.out.println(dll_0.removeAt(5));
         
         System.out.println(dll_0);
         System.out.println(dll_0.length);
@@ -50,7 +50,9 @@ class DLL<T>{
     
     // Add to end
     public DLL<T> add_end(T value){
+
         NodeDLL<T> newNode = new NodeDLL<T>(value);
+
         if (this.head == null){
             this.head = newNode;
             this.tail = newNode;
@@ -61,7 +63,6 @@ class DLL<T>{
         }
         
         this.length++;
-        
         return this;
     }
 
@@ -89,7 +90,9 @@ class DLL<T>{
 
     // Add to beginning
     public DLL<T> add_start(T value){
+
         NodeDLL<T> newNode = new NodeDLL<T>(value);
+        
         if (this.head == null){
             this.head = newNode;
             this.tail = newNode;
@@ -98,13 +101,16 @@ class DLL<T>{
             this.head.prev = newNode;
             this.head = newNode;
         }
+        
         this.length++;
         return this;
     }
 
     // Remove from beginning
     public T remove_start(){
+
         T returnValue = null;
+        
         if (this.head == null){
             throw new IllegalStateException("List empty.");
         } else if (this.head == this.tail){
@@ -118,71 +124,77 @@ class DLL<T>{
             this.head.prev = null;
             this.length--;
         }
+        
         return returnValue;
     }
 
     // Get at index
     public T getAt(int i){
+
         T returnValue = null;
+
         if (this.head == null){
             throw new IllegalStateException("List empty.");
         } else if (i < 0 || i >= this.length){
             throw new IndexOutOfBoundsException("Index out of bounds.");
         } else {
+            
+            NodeDLL<T> current;
+            
             if (i < this.length / 2){
-
-                NodeDLL<T> current = this.head;
+                current = this.head;
                 while (i > 0){
                     current = current.next;
                     i--;
                 }
-                returnValue = current.value;
-            
             } else {
-                
-                NodeDLL<T> current = this.tail;
-                int indexFromTail = this.length - 1 - i;
-                while (indexFromTail > 0){
+                current = this.tail;
+                i = this.length - 1 - i;
+                while (i > 0){
                     current = current.prev;
-                    indexFromTail--;
+                    i--;
                 }
-                returnValue = current.value;
             }
+
+            returnValue = current.value;
         }
         return returnValue;
     }
 
     // Set at index
     public DLL<T> setAt(int i, T value){
+
         if (this.head == null){
             throw new IllegalStateException("List empty.");
         } else if (i < 0 || i >= this.length){
             throw new IndexOutOfBoundsException("Index out of bounds.");
         } else {
-            if (i < this.length / 2){
 
-                NodeDLL<T> current = this.head;
+            NodeDLL<T> current;
+            
+            if (i < this.length / 2){
+                current = this.head;
                 while (i > 0){
                     current = current.next;
                     i--;
                 }
-                current.value = value;
             } else {
-                
-                NodeDLL<T> current = this.tail;
-                int indexFromTail = this.length - 1 - i;
-                while (indexFromTail > 0){
+                current = this.tail;
+                i = this.length - 1 - i;
+                while (i > 0){
                     current = current.prev;
-                    indexFromTail--;
+                    i--;
                 }
-                current.value = value;
             }
+            
+            current.value = value;
         }
         return this;
     }
 
     // Insert at index
     public DLL<T> insertAt(int i, T value){
+
         if (i == 0){
             this.add_start(value);
         } else if (i < 0 || i >= this.length){
@@ -190,34 +202,27 @@ class DLL<T>{
         } else {
 
             NodeDLL<T> newNode = new NodeDLL<T>(value);
+            NodeDLL<T> current;
             
             if (i < this.length / 2){
-
-                NodeDLL<T> current = this.head;
+                current = this.head;
                 while (i > 0){
                     current = current.next;
                     i--;
                 }
-            
-                newNode.next = current;
-                newNode.prev = current.prev;
-                current.prev.next = newNode;
-                current.prev = newNode;
-            
             } else {
-                
-                NodeDLL<T> current = this.tail;
-                int indexFromTail = this.length - 1 - i;
-                while (indexFromTail > 0){
+                current = this.tail;
+                i = this.length - 1 - i;
+                while (i > 0){
                     current = current.prev;
-                    indexFromTail--;
+                    i--;
                 }
-            
-                newNode.next = current;
-                newNode.prev = current.prev;
-                current.prev.next = newNode;
-                current.prev = newNode;
             }
+
+            newNode.next = current;
+            newNode.prev = current.prev;
+            current.prev.next = newNode;
+            current.prev = newNode;
             this.length++;
         }
         return this;
@@ -226,40 +231,38 @@ class DLL<T>{
     // Remove from index
     public T removeAt(int i){
 
-        T returnValue = null;
+        T returnValue;
         
         if (this.head == null){
             throw new IllegalStateException("List empty.");
         } else if (i < 0 || i >= this.length){
             throw new IndexOutOfBoundsException("Index out of bounds.");
         } else if (i == 0){
-            returnValue = this.remove_start();
+            return this.remove_start();
         } else if (i == this.length - 1){
-            returnValue = this.remove_end();
+            return this.remove_end();
         } else {
 
-            if (i < this.length / 2){
+            NodeDLL<T> current;
 
-                NodeDLL<T> current = this.head;
+            if (i < this.length / 2){
+                current = this.head;
                 while (i > 0){
                     current = current.next;
                     i--;
                 }
-                returnValue = current.value;
-                current.prev.next = current.next;
-                current.next.prev = current.prev;
             } else {
-                
-                NodeDLL<T> current = this.tail;
-                int indexFromTail = this.length - 1 - i;
-                while (indexFromTail > 0){
+                current = this.tail;
+                i = this.length - 1 - i;
+                while (i > 0){
                     current = current.prev;
-                    indexFromTail--;
+                    i--;
                 }
-                returnValue = current.value;
-                current.prev.next = current.next;
-                current.next.prev = current.prev;
             }
+
+            returnValue = current.value;
+            current.prev.next = current.next;
+            current.next.prev = current.prev;
             this.length--;
         }
         return returnValue;
