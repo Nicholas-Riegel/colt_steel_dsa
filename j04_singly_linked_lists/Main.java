@@ -34,12 +34,7 @@ public class Main {// this has to be at top to use 'java filename.java'
         list0.push_end("beautiful");
         list0.push_end("being");
         
-        try {
-            System.out.println(list0.reverse());  
-        } catch (IndexOutOfBoundsException | IllegalStateException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-        
+        System.out.println(list0.reverse());  
     }
 }
 
@@ -315,9 +310,6 @@ class SLL<T>{
 
     // Reverse (elegant solution)
     public SLL<T> reverse(){
-
-        if (this.head == null) return this;
-        if (this.head == this.tail) return this;
 
         Node<T> prev = null;
         Node<T> mid = this.head;
