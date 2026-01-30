@@ -7,11 +7,11 @@ public class Main {
         DLL<String> dll_0 = new DLL<String>();
         dll_0.add_end("Hi");        
         dll_0.add_end("there");        
-        // dll_0.add_end("you");        
-        // dll_0.add_end("beautiful");        
-        // dll_0.add_end("thing");
+        dll_0.add_end("you");        
+        dll_0.add_end("beautiful");        
+        dll_0.add_end("thing");
         
-        System.out.println(dll_0.reverse());
+        System.out.println(dll_0.getAt(3));
     }
 }
 
@@ -126,6 +126,27 @@ class DLL<T>{
         return returnValue;
     }
 
+    public NodeDLL<T> findNode(int i){
+
+        NodeDLL<T> node;
+        
+        if (i < this.length / 2){
+            node = this.head;
+            while (i > 0){
+                node = node.next;
+                i--;
+            }
+        } else {
+            node = this.tail;
+            i = this.length - 1 - i;
+            while (i > 0){
+                node = node.prev;
+                i--;
+            }
+        }
+        return node;
+    }
+
     // Get at index
     public T getAt(int i){
 
@@ -135,22 +156,7 @@ class DLL<T>{
         
         else {
             
-            NodeDLL<T> current;
-            
-            if (i < this.length / 2){
-                current = this.head;
-                while (i > 0){
-                    current = current.next;
-                    i--;
-                }
-            } else {
-                current = this.tail;
-                i = this.length - 1 - i;
-                while (i > 0){
-                    current = current.prev;
-                    i--;
-                }
-            }
+            NodeDLL<T> current = this.findNode(i);
 
             return current.value;
         }
@@ -165,22 +171,7 @@ class DLL<T>{
         
         else {
 
-            NodeDLL<T> current;
-            
-            if (i < this.length / 2){
-                current = this.head;
-                while (i > 0){
-                    current = current.next;
-                    i--;
-                }
-            } else {
-                current = this.tail;
-                i = this.length - 1 - i;
-                while (i > 0){
-                    current = current.prev;
-                    i--;
-                }
-            }
+            NodeDLL<T> current = this.findNode(i);
             
             current.value = value;
         }
@@ -197,22 +188,7 @@ class DLL<T>{
         else {
 
             NodeDLL<T> newNode = new NodeDLL<T>(value);
-            NodeDLL<T> current;
-            
-            if (i < this.length / 2){
-                current = this.head;
-                while (i > 0){
-                    current = current.next;
-                    i--;
-                }
-            } else {
-                current = this.tail;
-                i = this.length - 1 - i;
-                while (i > 0){
-                    current = current.prev;
-                    i--;
-                }
-            }
+            NodeDLL<T> current = this.findNode(i);
 
             newNode.next = current;
             newNode.prev = current.prev;
@@ -236,22 +212,7 @@ class DLL<T>{
         
         else {
 
-            NodeDLL<T> current;
-
-            if (i < this.length / 2){
-                current = this.head;
-                while (i > 0){
-                    current = current.next;
-                    i--;
-                }
-            } else {
-                current = this.tail;
-                i = this.length - 1 - i;
-                while (i > 0){
-                    current = current.prev;
-                    i--;
-                }
-            }
+            NodeDLL<T> current = this.findNode(i);
 
             current.prev.next = current.next;
             current.next.prev = current.prev;
@@ -269,12 +230,15 @@ class DLL<T>{
         NodeDLL<T> next;
         
         while (current != null){
+
             // Set next (and move next forward in next loop)
             next = current.next;
+            
             // Switch next and prev
             current.next = prev;
             current.prev = next;
-            // move prev and current forward
+            
+            // Move prev and current forward
             prev = current;
             current = next;
         }
