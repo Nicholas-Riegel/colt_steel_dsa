@@ -2,7 +2,8 @@ package j06_stacks_queues;
 
 import java.util.ArrayList;
 
-public class StackSLL<T> {
+// Stack with Singly Linked List
+public class Stack<T> {
 
     public int length = 0;
     public Node<T> head = null;
@@ -19,7 +20,7 @@ public class StackSLL<T> {
     }
 
     // Add to beginning
-    public StackSLL<T> push(T val){
+    public Stack<T> push(T val){
         Node<T> newNode = new Node<T>(val);
         if (this.head == null){
             this.head = newNode;

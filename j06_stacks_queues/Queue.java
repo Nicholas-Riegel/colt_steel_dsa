@@ -2,6 +2,7 @@ package j06_stacks_queues;
 
 import java.util.ArrayList;
 
+// Queue with Singly Linked List
 class Queue<T>{
 
     public int length = 0;
