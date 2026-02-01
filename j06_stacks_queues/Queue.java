@@ -20,9 +20,7 @@ class Queue<T>{
 
     // Add to end
     public Queue<T> enqueue(T val){
-
         Node<T> newNode = new Node<T>(val);
-        
         if (this.head == null){
             this.head = newNode;
             this.tail = newNode;
@@ -30,33 +28,21 @@ class Queue<T>{
             this.tail.next = newNode;
             this.tail = newNode;
         }
-        
         this.length++;
-        
         return this;
     }// Ot(1)
 
         // Remove from beginning
     public T dequeue(){
-        
-        // Guard
-        if (this.head == null){
-            throw new IllegalStateException("List is empty.");
-        }
-
-        // Main
+        if (this.head == null) throw new IllegalStateException("List is empty.");
         T value = this.head.value;
-        
         if (this.head != this.tail){
             this.head = this.head.next;
         } else {
             this.head = null;
             this.tail = null;
         }
-        
         this.length--;
-
         return value;
     } // Ot(1)
-
 }

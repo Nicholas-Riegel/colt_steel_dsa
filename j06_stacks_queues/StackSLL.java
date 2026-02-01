@@ -20,9 +20,7 @@ public class StackSLL<T> {
 
     // Add to beginning
     public StackSLL<T> push(T val){
-        
         Node<T> newNode = new Node<T>(val);
-        
         if (this.head == null){
             this.head = newNode;
             this.tail = this.head;
@@ -31,19 +29,13 @@ public class StackSLL<T> {
             this.head = newNode;
         }
         this.length++;
-        
         return this;
     } // Ot(1)
 
     // Remove from beginning
     public T pop(){
-        
-        // Guard
         if (this.head == null) throw new IllegalStateException("List is empty.");
-
-        // Main
         T value = this.head.value;
-        
         if (this.head != this.tail){
             this.head = this.head.next;
         } else {
@@ -51,7 +43,6 @@ public class StackSLL<T> {
             this.tail = null;
         }
         this.length--;
-
         return value;
     } // Ot(1)
 }
