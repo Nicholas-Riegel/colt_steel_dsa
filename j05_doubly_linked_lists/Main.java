@@ -156,9 +156,9 @@ class DLL<T>{
         
         else {
             
-            NodeDLL<T> current = this.findNode(i);
+            NodeDLL<T> targetNode = this.findNode(i);
 
-            return current.value;
+            return targetNode.value;
         }
     }
 
@@ -171,9 +171,9 @@ class DLL<T>{
         
         else {
 
-            NodeDLL<T> current = this.findNode(i);
+            NodeDLL<T> targetNode = this.findNode(i);
             
-            current.value = value;
+            targetNode.value = value;
         }
         return this;
     }
@@ -181,21 +181,23 @@ class DLL<T>{
     // Insert at index
     public DLL<T> insertAt(int i, T value){
 
-        if (i == 0) this.add_start(value);
+        if (i < 0 || i >= this.length) throw new IndexOutOfBoundsException("Index out of bounds.");
         
-        else if (i < 0 || i >= this.length) throw new IndexOutOfBoundsException("Index out of bounds.");
+        else if (i == 0) this.add_start(value);
         
         else {
 
             NodeDLL<T> newNode = new NodeDLL<T>(value);
-            NodeDLL<T> current = this.findNode(i);
+            NodeDLL<T> targetNode = this.findNode(i);
 
-            newNode.next = current;
-            newNode.prev = current.prev;
-            current.prev.next = newNode;
-            current.prev = newNode;
+            newNode.next = targetNode;
+            newNode.prev = targetNode.prev;
+            targetNode.prev.next = newNode;
+            targetNode.prev = newNode;
+
             this.length++;
         }
+
         return this;
     }
 
@@ -212,13 +214,14 @@ class DLL<T>{
         
         else {
 
-            NodeDLL<T> current = this.findNode(i);
+            NodeDLL<T> targetNode = this.findNode(i);
 
-            current.prev.next = current.next;
-            current.next.prev = current.prev;
+            targetNode.prev.next = targetNode.next;
+            targetNode.next.prev = targetNode.prev;
+
             this.length--;
 
-            return current.value;
+            return targetNode.value;
         }
     }
 
