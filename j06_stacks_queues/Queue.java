@@ -10,8 +10,10 @@ class Queue<T>{
     public Node<T> tail = null;
 
     public String toString(){
+
         ArrayList<T> arrList = new ArrayList<>();
         Node<T> current = this.head;
+
         while (current != null){
             arrList.add(current.value);
             current = current.next;
@@ -21,7 +23,9 @@ class Queue<T>{
 
     // Add to end
     public Queue<T> enqueue(T val){
+
         Node<T> newNode = new Node<T>(val);
+
         if (this.head == null){
             this.head = newNode;
             this.tail = newNode;
@@ -29,20 +33,25 @@ class Queue<T>{
             this.tail.next = newNode;
             this.tail = newNode;
         }
+
         this.length++;
         return this;
     }// Ot(1)
 
     // Remove from beginning
     public T dequeue(){
+        
         if (this.head == null) throw new IllegalStateException("List is empty.");
+        
         T value = this.head.value;
-        if (this.head != this.tail){
-            this.head = this.head.next;
-        } else {
+        
+        if (this.head == this.tail){
             this.head = null;
             this.tail = null;
+        } else {
+            this.head = this.head.next;
         }
+        
         this.length--;
         return value;
     } // Ot(1)

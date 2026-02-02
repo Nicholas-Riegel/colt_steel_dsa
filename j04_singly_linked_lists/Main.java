@@ -1,20 +1,3 @@
-// LINKED LISTS
-// A data structure that contains a head, tail and length property.
-// Linked Lists consist of nodes, and each node has a value and a pointer to another node or null
-// no indexes
-// need to start at the beginning and go to the next etc. to get to the last
-
-// Linked Lists 
-
-// Do not have indexes!
-// Connected via nodes with a next pointer
-// Random access is not allowed
-
-// Arrays and ArrayLists
-
-// Indexed in order!
-// Insertion and deletion can be expensive
-// Can quickly be accessed at a specific index
 
 
 import java.util.ArrayList;
@@ -269,16 +252,23 @@ class SLL<T>{
     public SLL<T> reverse(){
 
         Node<T> prev = null;
-        Node<T> mid = this.head;
+        Node<T> current = this.head;
         Node<T> next = null;
 
-        while (mid != null){
-            next = mid.next;
-            mid.next = prev;
-            prev = mid;
-            mid = next;
+        while (current != null){
+
+            // set next (and move next forward on next loop)
+            next = current.next;
+            
+            // reverse current.next
+            current.next = prev;
+            
+            // move prev and current forward
+            prev = current;
+            current = next;
         }
 
+        // Switch head and tail
         this.tail = this.head;
         this.head = prev;
         

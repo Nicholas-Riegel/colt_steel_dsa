@@ -14,7 +14,7 @@ public class Main {
         System.out.println(dll_0.getAt(3));
     }
 }
-
+// Node to be used in DLL
 class Node<T>{
 
     public T value;
@@ -26,6 +26,7 @@ class Node<T>{
     }
 }
 
+// Doubly linked list
 class DLL<T>{
 
     public int length = 0;
@@ -246,6 +247,7 @@ class DLL<T>{
             current = next;
         }
         
+        // Switch head and tail
         Node<T> temp = this.tail;
         this.tail = this.head;
         this.head = temp;
