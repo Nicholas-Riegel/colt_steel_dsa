@@ -15,13 +15,13 @@ public class Main {
     }
 }
 
-class NodeDLL<T>{
+class Node<T>{
 
     public T value;
-    public NodeDLL<T> next = null;
-    public NodeDLL<T> prev = null;
+    public Node<T> next = null;
+    public Node<T> prev = null;
 
-    NodeDLL(T value){
+    Node(T value){
         this.value = value;
     }
 }
@@ -29,14 +29,14 @@ class NodeDLL<T>{
 class DLL<T>{
 
     public int length = 0;
-    public NodeDLL<T> head;
-    public NodeDLL<T> tail;
+    public Node<T> head;
+    public Node<T> tail;
 
     // To string
     public String toString(){
 
         ArrayList<T> arrlist = new ArrayList<>();
-        NodeDLL<T> current = this.head;
+        Node<T> current = this.head;
         
         while (current != null){
             arrlist.add(current.value);
@@ -49,7 +49,7 @@ class DLL<T>{
     // Add to end
     public DLL<T> add_end(T value){
 
-        NodeDLL<T> newNode = new NodeDLL<T>(value);
+        Node<T> newNode = new Node<T>(value);
 
         if (this.head == null){
             this.head = newNode;
@@ -89,7 +89,7 @@ class DLL<T>{
     // Add to beginning
     public DLL<T> add_start(T value){
 
-        NodeDLL<T> newNode = new NodeDLL<T>(value);
+        Node<T> newNode = new Node<T>(value);
         
         if (this.head == null){
             this.head = newNode;
@@ -126,9 +126,9 @@ class DLL<T>{
         return returnValue;
     }
 
-    public NodeDLL<T> findNode(int i){
+    public Node<T> findNode(int i){
 
-        NodeDLL<T> node;
+        Node<T> node;
         
         if (i < this.length / 2){
             node = this.head;
@@ -156,7 +156,7 @@ class DLL<T>{
         
         else {
             
-            NodeDLL<T> targetNode = this.findNode(i);
+            Node<T> targetNode = this.findNode(i);
 
             return targetNode.value;
         }
@@ -171,7 +171,7 @@ class DLL<T>{
         
         else {
 
-            NodeDLL<T> targetNode = this.findNode(i);
+            Node<T> targetNode = this.findNode(i);
             
             targetNode.value = value;
         }
@@ -187,8 +187,8 @@ class DLL<T>{
         
         else {
 
-            NodeDLL<T> newNode = new NodeDLL<T>(value);
-            NodeDLL<T> targetNode = this.findNode(i);
+            Node<T> newNode = new Node<T>(value);
+            Node<T> targetNode = this.findNode(i);
 
             newNode.next = targetNode;
             newNode.prev = targetNode.prev;
@@ -214,7 +214,7 @@ class DLL<T>{
         
         else {
 
-            NodeDLL<T> targetNode = this.findNode(i);
+            Node<T> targetNode = this.findNode(i);
 
             targetNode.prev.next = targetNode.next;
             targetNode.next.prev = targetNode.prev;
@@ -228,9 +228,9 @@ class DLL<T>{
     // Reverse
     public DLL<T> reverse(){
 
-        NodeDLL<T> prev = null;
-        NodeDLL<T> current = this.head;
-        NodeDLL<T> next;
+        Node<T> prev = null;
+        Node<T> current = this.head;
+        Node<T> next;
         
         while (current != null){
 
@@ -246,7 +246,7 @@ class DLL<T>{
             current = next;
         }
         
-        NodeDLL<T> temp = this.tail;
+        Node<T> temp = this.tail;
         this.tail = this.head;
         this.head = temp;
 

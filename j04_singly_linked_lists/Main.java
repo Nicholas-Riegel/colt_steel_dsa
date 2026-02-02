@@ -265,50 +265,7 @@ class SLL<T>{
         return arrlist.toString();
     }// Ot(n)
 
-
-
-    // Reverse (my solution)
-    // prev  mid   next
-    // 13 -> 27 -> 32 -> 71
-    //       prev  mid   next
-    // public SLL<T> reverse(){
-
-    //     // Guard
-    //     if (this.head == null) return this;
-    //     if (this.head == this.tail) return this;
-
-    //     // Main 
-    //     Node<T> prev = this.head;
-    //     Node<T> mid = this.head.next;
-    //     Node<T> next = this.head.next.next; // only needed for length > 2
-
-    //     if (this.length == 2){
-
-    //         mid.next = prev;
-    //         prev.next = null;
-    //         this.head = mid;
-    //         this.tail = prev;
-    //     }
-
-    //     if (this.length > 2){
-
-    //         while(next.next != null){
-    //             mid.next = prev;
-    //             prev = mid;
-    //             mid = next;
-    //             next = next.next;
-    //         }
-    //         mid.next = prev;
-    //         next.next = mid;
-    //         this.tail = this.head;
-    //         this.head = next;
-    //         this.tail.next = null;
-    //     }
-
-    //     return this;
-    // }// Ot(n)
-
-    // Reverse (elegant solution)
+    // Reverse 
     public SLL<T> reverse(){
 
         Node<T> prev = null;
