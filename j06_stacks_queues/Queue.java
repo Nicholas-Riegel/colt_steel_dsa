@@ -33,7 +33,7 @@ class Queue<T>{
         return this;
     }// Ot(1)
 
-        // Remove from beginning
+    // Remove from beginning
     public T dequeue(){
         if (this.head == null) throw new IllegalStateException("List is empty.");
         T value = this.head.value;
