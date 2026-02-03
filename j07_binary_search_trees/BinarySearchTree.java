@@ -6,9 +6,16 @@ public class BinarySearchTree{
     
     public Node root = null;
 
+    @Override
+    public String toString() {
+        return this.depthFirstSearch("IN_ORDER").toString();
+    }
+
     // add (iteratively)
     public boolean add(int val){
         
+        if (this.contains(val)) return false;
+
         Node newNode = new Node(val);
 
         if (this.root == null){ 
@@ -19,9 +26,7 @@ public class BinarySearchTree{
         Node parent = this.root;
 
         while (true){
-            if (newNode.value == parent.value){
-                return false;
-            } else if (newNode.value < parent.value){
+            if (newNode.value < parent.value){
                 if (parent.left == null){
                     parent.left = newNode;
                     break;
@@ -40,8 +45,8 @@ public class BinarySearchTree{
         return true;
     }
 
-    // find
-    public boolean find(int val){
+    // Contains value?
+    public boolean contains(int val){
 
         if (this.root == null) return false;
         
@@ -70,15 +75,15 @@ public class BinarySearchTree{
     // Breadth First Search (BFS)
     // Visits nodes level by level, starting from the root and moving horizontally
     // across each level before going to the next level. 
-    public String breadthFirstSearch(){
+    public ArrayList<Integer> breadthFirstSearch(){
         
-        // Guard
-        if (this.root == null) return "[]";
-        
-        // Only use queue.add() and .remove(0)
+        // Only use queue.add() and queue.remove(0) to mimic queue behavior
         ArrayList<Node> queue = new ArrayList<>();
         ArrayList<Integer> arrList = new ArrayList<>();
         
+        // Guard
+        if (this.root == null) return arrList;
+
         queue.add(this.root);
         
         while (!queue.isEmpty()){
@@ -87,7 +92,7 @@ public class BinarySearchTree{
             if (node.left != null) queue.add(node.left);
             if (node.right != null) queue.add(node.right);
         }
-        return arrList.toString();
+        return arrList;
     }
     
     // Depth First Search (DFS) 
@@ -130,5 +135,4 @@ public class BinarySearchTree{
         if (node.right != null) postOrder(node.right, parameterList);
         parameterList.add(node.value);
     }
-    
 }
