@@ -114,6 +114,8 @@ public class BST{
     }
     
     // DFS Post Order Helper function 
+    // Visits nodes in order: left subtree → right subtree → root
+    // Processes each node after visiting its children (hence "post-order")
     public void PostOrder(Node node, ArrayList<Integer> parameterList){
         if (node.left != null) PostOrder(node.left, parameterList);
         if (node.right != null) PostOrder(node.right, parameterList);
@@ -121,6 +123,8 @@ public class BST{
     }
     
     // DFS In Order Helper function 
+    // Visits nodes in order: left subtree → root → right subtree
+    // For BST, this gives values in sorted ascending order
     public void InOrder(Node node, ArrayList<Integer> parameterList){
         if (node.left != null) InOrder(node.left, parameterList);
         parameterList.add(node.value);
