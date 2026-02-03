@@ -98,8 +98,8 @@ public class BST{
         ArrayList<Integer> returnList = new ArrayList<>();
         
         if (type.equals("PRE_ORDER")) this.PreOrder(this.root, returnList);
-        if (type.equals("POST_ORDER")) this.PostOrder(root, returnList);
-        if (type.equals("IN_ORDER")) this.InOrder(root, returnList);
+        if (type.equals("IN_ORDER")) this.InOrder(this.root, returnList);
+        if (type.equals("POST_ORDER")) this.PostOrder(this.root, returnList);
         
         return returnList.toString();
     }
@@ -113,6 +113,15 @@ public class BST{
         if (node.right != null) PreOrder(node.right, parameterList);
     }
     
+    // DFS In Order Helper function 
+    // Visits nodes in order: left subtree → root → right subtree
+    // For BST, this gives values in sorted ascending order
+    public void InOrder(Node node, ArrayList<Integer> parameterList){
+        if (node.left != null) InOrder(node.left, parameterList);
+        parameterList.add(node.value);
+        if (node.right != null) InOrder(node.right, parameterList);
+    }
+    
     // DFS Post Order Helper function 
     // Visits nodes in order: left subtree → right subtree → root
     // Processes each node after visiting its children (hence "post-order")
@@ -122,12 +131,4 @@ public class BST{
         parameterList.add(node.value);
     }
     
-    // DFS In Order Helper function 
-    // Visits nodes in order: left subtree → root → right subtree
-    // For BST, this gives values in sorted ascending order
-    public void InOrder(Node node, ArrayList<Integer> parameterList){
-        if (node.left != null) InOrder(node.left, parameterList);
-        parameterList.add(node.value);
-        if (node.right != null) InOrder(node.right, parameterList);
-    }
 }
