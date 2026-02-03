@@ -91,17 +91,17 @@ public class BST{
     }
     
     // Depth First Search (DFS) 
-    public String dfsSearch(String type){
-        
-        if (this.root == null) return "[]";
+    public ArrayList<Integer> dfsSearch(String type){
         
         ArrayList<Integer> returnList = new ArrayList<>();
+
+        if (this.root == null) return returnList;
         
         if (type.equals("PRE_ORDER")) this.PreOrder(this.root, returnList);
         if (type.equals("IN_ORDER")) this.InOrder(this.root, returnList);
         if (type.equals("POST_ORDER")) this.PostOrder(this.root, returnList);
         
-        return returnList.toString();
+        return returnList;
     }
     
     // DFS Pre Order Helper function 
