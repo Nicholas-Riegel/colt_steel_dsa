@@ -2,7 +2,7 @@ package j07_binary_search_trees;
 
 import java.util.ArrayList;
 
-public class BST{
+public class BinarySearchTree{
     
     public Node root = null;
 
