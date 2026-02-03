@@ -12,8 +12,8 @@ public class Main{
         bst.add(7);
 
         // System.out.println(bst.breadthFirstSearch());
-        System.out.println(bst.dfsSearch("PRE_ORDER"));
-        System.out.println(bst.dfsSearch("IN_ORDER"));
-        System.out.println(bst.dfsSearch("POST_ORDER"));
+        System.out.println(bst.depthFirstSearch("PRE_ORDER"));
+        System.out.println(bst.depthFirstSearch("IN_ORDER"));
+        System.out.println(bst.depthFirstSearch("POST_ORDER"));
     }
 }

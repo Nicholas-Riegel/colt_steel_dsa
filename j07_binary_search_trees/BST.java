@@ -91,15 +91,15 @@ public class BST{
     }
     
     // Depth First Search (DFS) 
-    public ArrayList<Integer> dfsSearch(String type){
+    public ArrayList<Integer> depthFirstSearch(String type){
         
         ArrayList<Integer> returnList = new ArrayList<>();
 
         if (this.root == null) return returnList;
         
-        if (type.equals("PRE_ORDER")) this.PreOrder(this.root, returnList);
-        if (type.equals("IN_ORDER")) this.InOrder(this.root, returnList);
-        if (type.equals("POST_ORDER")) this.PostOrder(this.root, returnList);
+        if (type.equals("PRE_ORDER")) this.preOrder(this.root, returnList);
+        if (type.equals("IN_ORDER")) this.inOrder(this.root, returnList);
+        if (type.equals("POST_ORDER")) this.postOrder(this.root, returnList);
         
         return returnList;
     }
@@ -107,27 +107,27 @@ public class BST{
     // DFS Pre Order Helper function 
     // Visits nodes in order: root → left subtree → right subtree
     // Processes each node before visiting its children (hence "pre-order")
-    public void PreOrder(Node node, ArrayList<Integer> parameterList){
+    public void preOrder(Node node, ArrayList<Integer> parameterList){
         parameterList.add(node.value);
-        if (node.left != null) PreOrder(node.left, parameterList);
-        if (node.right != null) PreOrder(node.right, parameterList);
+        if (node.left != null) preOrder(node.left, parameterList);
+        if (node.right != null) preOrder(node.right, parameterList);
     }
     
     // DFS In Order Helper function 
     // Visits nodes in order: left subtree → root → right subtree
     // For BST, this gives values in sorted ascending order
-    public void InOrder(Node node, ArrayList<Integer> parameterList){
-        if (node.left != null) InOrder(node.left, parameterList);
+    public void inOrder(Node node, ArrayList<Integer> parameterList){
+        if (node.left != null) inOrder(node.left, parameterList);
         parameterList.add(node.value);
-        if (node.right != null) InOrder(node.right, parameterList);
+        if (node.right != null) inOrder(node.right, parameterList);
     }
     
     // DFS Post Order Helper function 
     // Visits nodes in order: left subtree → right subtree → root
     // Processes each node after visiting its children (hence "post-order")
-    public void PostOrder(Node node, ArrayList<Integer> parameterList){
-        if (node.left != null) PostOrder(node.left, parameterList);
-        if (node.right != null) PostOrder(node.right, parameterList);
+    public void postOrder(Node node, ArrayList<Integer> parameterList){
+        if (node.left != null) postOrder(node.left, parameterList);
+        if (node.right != null) postOrder(node.right, parameterList);
         parameterList.add(node.value);
     }
     
