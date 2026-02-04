@@ -14,8 +14,6 @@ public class BinarySearchTree{
     // add (iteratively)
     public boolean add(int val){
         
-        if (this.contains(val)) return false;
-
         Node newNode = new Node(val);
 
         if (this.root == null){ 
@@ -26,7 +24,9 @@ public class BinarySearchTree{
         Node parent = this.root;
 
         while (true){
-            if (newNode.value < parent.value){
+            if (newNode.value == parent.value){
+                return false;
+            } else if (newNode.value < parent.value){
                 if (parent.left == null){
                     parent.left = newNode;
                     break;
@@ -84,10 +84,11 @@ public class BinarySearchTree{
         // Guard
         if (this.root == null) return arrList;
 
-        queue.add(this.root);
-        
+        // Main
+        Node node = this.root;
+        queue.add(node);        
         while (!queue.isEmpty()){
-            Node node = queue.remove(0);
+            node = queue.remove(0);
             arrList.add(node.value);
             if (node.left != null) queue.add(node.left);
             if (node.right != null) queue.add(node.right);
