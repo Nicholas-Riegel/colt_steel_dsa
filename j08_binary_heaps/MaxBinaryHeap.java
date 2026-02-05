@@ -23,8 +23,10 @@ public class MaxBinaryHeap {
     // then check again 
     public void addHelper(int childIndex){
 
-        // set child and parent values
+        // get parent index
         int parentIndex = (childIndex - 1)/2;
+        
+        // get child and parent values
         int childValue = maxbhList.get(childIndex);
         int parentValue = maxbhList.get(parentIndex);
         
@@ -35,7 +37,7 @@ public class MaxBinaryHeap {
             maxbhList.set(parentIndex, childValue);
             maxbhList.set(childIndex, parentValue);
             
-            // run again from new index
+            // run again (parentIndex becomes new childIndex)
             addHelper(parentIndex);
         }
     }
