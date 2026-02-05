@@ -25,23 +25,23 @@ The right child is at 2n + 2
 For any child node at index  n...
 Its parent is at index (n-1)/2 floored
 
-// My first solution
-    // public void sortPostAdd(){
+// Iterative solution
+// public void sortPostAdd(){
 
-    //     int indexChild = mbhArrayList.size() - 1;
-    //     int indexParent = (indexChild - 1)/2;
-    //     int parentValue = mbhArrayList.get(indexParent);
-    //     int childValue = mbhArrayList.get(indexChild);
+//     int indexChild = mbhArrayList.size() - 1;
+//     int indexParent = (indexChild - 1)/2;
+//     int parentValue = mbhArrayList.get(indexParent);
+//     int childValue = mbhArrayList.get(indexChild);
         
-    //     while (childValue > parentValue) {
+//     while (childValue > parentValue) {
 
-    //         mbhArrayList.set(indexParent, childValue);
-    //         mbhArrayList.set(indexChild, parentValue);
+//         mbhArrayList.set(indexParent, childValue);
+//         mbhArrayList.set(indexChild, parentValue);
             
-    //         indexChild = indexParent;
-    //         indexParent = (indexChild - 1)/2;
+//         indexChild = indexParent;
+//         indexParent = (indexChild - 1)/2;
             
-    //         parentValue = mbhArrayList.get(indexParent);
-    //         childValue = mbhArrayList.get(indexChild);
-    //     }
-    // }
+//         parentValue = mbhArrayList.get(indexParent);
+//         childValue = mbhArrayList.get(indexChild);
+//     }
+// }

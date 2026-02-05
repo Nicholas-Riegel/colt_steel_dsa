@@ -4,39 +4,39 @@ import java.util.ArrayList;
 
 public class MaxBinaryHeap {
 
-    ArrayList<Integer> mbhArrayList = new ArrayList<>();
+    ArrayList<Integer> maxbhList = new ArrayList<>();
 
     @Override
     public String toString(){
-        return this.mbhArrayList.toString();
+        return maxbhList.toString();
     }
 
     public void add(int value){
-        mbhArrayList.add(value);
-        this.addHelper(mbhArrayList.size() - 1);
+        maxbhList.add(value);
+        addHelper(maxbhList.size() - 1);
     }
 
-    // My second solution (recursive)
-    // After adding to the ArrayList
-    // If child is greater than parent
-    // Switch child and parent
+    // Recursive solution
+    // after adding to the ArrayList
+    // if child is greater than parent
+    // switch child and parent
     // then check again 
-    public void addHelper(int indexChild){
+    public void addHelper(int childIndex){
 
         // set child and parent values
-        int indexParent = (indexChild - 1)/2;
-        int valueChild = mbhArrayList.get(indexChild);
-        int valueParent = mbhArrayList.get(indexParent);
+        int parentIndex = (childIndex - 1)/2;
+        int childValue = maxbhList.get(childIndex);
+        int parentValue = maxbhList.get(parentIndex);
         
         // if value of child is greater than value of parent
-        if (valueChild > valueParent){
+        if (childValue > parentValue){
 
             // switch values
-            mbhArrayList.set(indexParent, valueChild);
-            mbhArrayList.set(indexChild, valueParent);
+            maxbhList.set(parentIndex, childValue);
+            maxbhList.set(childIndex, parentValue);
             
-            // run function again (with indexParent for indexChild)
-            addHelper(indexParent);
+            // run again from new index
+            addHelper(parentIndex);
         }
     }
 }
