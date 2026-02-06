@@ -11,9 +11,9 @@ public class MaxBinaryHeap {
         return maxbhList.toString();
     }
 
-    public void add(int value){
+    public void addLeaf(int value){
         maxbhList.add(value);
-        addHelper(maxbhList.size() - 1);
+        rearrangeFromLeaf(maxbhList.size() - 1);
     }
 
     // Recursive solution
@@ -21,7 +21,7 @@ public class MaxBinaryHeap {
     // if child is greater than parent
     // switch child and parent
     // then check again 
-    public void addHelper(int childIndex){
+    public void rearrangeFromLeaf(int childIndex){
 
         // get parent index
         int parentIndex = (childIndex - 1)/2;
@@ -32,22 +32,21 @@ public class MaxBinaryHeap {
         
         // if value of child is greater than value of parent
         if (childValue > parentValue){
-
             // switch values
             swap(childIndex, parentIndex);
-            
             // run again (parentIndex becomes new childIndex)
-            addHelper(parentIndex);
+            rearrangeFromLeaf(parentIndex);
         }
     }
 
-    public void swap(int index1, int index2){
+    // Swap helper function
+    public void swap(int firstIndex, int secondIndex){
         // Get the values
-        int firstValue = maxbhList.get(index1);
-        int secondValue = maxbhList.get(index2);
+        int firstValue = maxbhList.get(firstIndex);
+        int secondValue = maxbhList.get(secondIndex);
         // swap
-        maxbhList.set(index2, firstValue);
-        maxbhList.set(index1, secondValue);        
+        maxbhList.set(secondIndex, firstValue);
+        maxbhList.set(firstIndex, secondValue);        
     }
 
     // Swap the first value in the values property with the last one
@@ -72,7 +71,7 @@ public class MaxBinaryHeap {
         int returnValue = maxbhList.removeLast();
 
         // Rearrange Heap
-        removeHelper(0);
+        rearrangeFromRoot(0);
 
         // return removed value
         return returnValue;
@@ -80,7 +79,7 @@ public class MaxBinaryHeap {
 
     // Helper function for removeRoot()
     // Recursively rearrange heap
-    public void removeHelper(int parentIndex){
+    public void rearrangeFromRoot(int parentIndex){
 
         // get child index
         Integer childIndex = findLargestChildIndex(parentIndex);
@@ -97,11 +96,11 @@ public class MaxBinaryHeap {
             // swap parent and child values
             swap(parentIndex, childIndex);
             // run method again on new index
-            removeHelper(childIndex);
+            rearrangeFromRoot(childIndex);
         }
     }
 
-    // Helper function for removeHelper()
+    // Helper function for rearrangeFromRoot()
     // find index of largest child or return null
     public Integer findLargestChildIndex(int parentIndex){
         
