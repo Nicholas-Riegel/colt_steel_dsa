@@ -13,7 +13,7 @@ public class MaxBinaryHeap {
 
     public void addLeaf(int value){
         maxbhList.add(value);
-        rearrangeFromLeaf(maxbhList.size() - 1);
+        arrangeFromLeaf(maxbhList.size() - 1);
     }
 
     // Recursive solution
@@ -21,7 +21,7 @@ public class MaxBinaryHeap {
     // if child is greater than parent
     // switch child and parent
     // then check again 
-    public void rearrangeFromLeaf(int childIndex){
+    public void arrangeFromLeaf(int childIndex){
 
         // get parent index
         int parentIndex = (childIndex - 1)/2;
@@ -35,11 +35,12 @@ public class MaxBinaryHeap {
             // switch values
             swap(childIndex, parentIndex);
             // run again (parentIndex becomes new childIndex)
-            rearrangeFromLeaf(parentIndex);
+            arrangeFromLeaf(parentIndex);
         }
     }
 
     // Swap helper function
+    // swaps values in maxbhList
     public void swap(int firstIndex, int secondIndex){
         // Get the values
         int firstValue = maxbhList.get(firstIndex);
@@ -49,20 +50,21 @@ public class MaxBinaryHeap {
         maxbhList.set(firstIndex, secondValue);        
     }
 
-    // Swap the first value in the values property with the last one
-    // Pop from the values property, so you can return the value at the end.
-    // Have the new root "sink down" to the correct spot...​
-    // Your parent index starts at 0 (the root)
-    // Find the index of the left child: 2 * index + 1 (make sure its not out of bounds)
-    // Find the index of the right child: 2*index + 2 (make sure its not out of bounds)
-    // If the left or right child is greater than the element...swap. If both left and right children are larger, swap with the largest child.
+    // Swap first and last values
+    // Pop last value to return at the end
+    // Have the new root "sink down" to the correct spot
+    // Find index of the left child: 2 * index + 1 (make sure its not out of bounds)
+    // Find index of the right child: 2 * index + 2 (make sure its not out of bounds)
+    // If the left or right child is greater than the element, swap. 
+    // If both are larger, swap with the largest child.
     // The child index you swapped to now becomes the new parent index.  
     // Keep looping and swapping until neither child is larger than the element.
-    // Return the old root!
+    // Return the old root
     public Integer removeRoot(){
         
         // Guard
         if (maxbhList.size() == 0) return null;
+        if (maxbhList.size() < 3) return maxbhList.removeFirst(); // optional optimization
 
         // swap first and last values
         swap(0, maxbhList.size() - 1);
@@ -70,8 +72,8 @@ public class MaxBinaryHeap {
         // remove last value
         int returnValue = maxbhList.removeLast();
 
-        // Rearrange Heap
-        rearrangeFromRoot(0);
+        // Rearrange
+        arrangeFromRoot(0);
 
         // return removed value
         return returnValue;
@@ -79,10 +81,10 @@ public class MaxBinaryHeap {
 
     // Helper function for removeRoot()
     // Recursively rearrange heap
-    public void rearrangeFromRoot(int parentIndex){
+    public void arrangeFromRoot(int parentIndex){
 
         // get child index
-        Integer childIndex = findLargestChildIndex(parentIndex);
+        Integer childIndex = largestChildIndex(parentIndex);
         
         // guard
         if (childIndex == null) return;
@@ -96,33 +98,32 @@ public class MaxBinaryHeap {
             // swap parent and child values
             swap(parentIndex, childIndex);
             // run method again on new index
-            rearrangeFromRoot(childIndex);
+            arrangeFromRoot(childIndex);
         }
     }
 
-    // Helper function for rearrangeFromRoot()
+    // Helper function for arrangeFromRoot()
     // find index of largest child or return null
-    public Integer findLargestChildIndex(int parentIndex){
+    public Integer largestChildIndex(int parentIndex){
         
         // Get the child indexes
         int leftChildIndex = 2 * parentIndex + 1;
         int rightChildIndex = 2 * parentIndex + 2;
 
         // if both are ob, return null
-        if (leftChildIndex >= maxbhList.size()){
-            return null;
+        if (leftChildIndex >= maxbhList.size()) return null;
+        
         // if only right is ob, return left
-        } else if (rightChildIndex >= maxbhList.size()){
-            return leftChildIndex;
-        // return the index of larger value
-        } else {
+        else if (rightChildIndex >= maxbhList.size()) return leftChildIndex;
+        
+        // if both are in bounds, return the index of larger value
+        else {
+
             int leftChildValue = maxbhList.get(leftChildIndex);
             int rightChildValue = maxbhList.get(rightChildIndex);
-            if (leftChildValue > rightChildValue){
-                return leftChildIndex;
-            } else {
-                return rightChildIndex;
-            }
+
+            if (leftChildValue > rightChildValue) return leftChildIndex;
+            else return rightChildIndex;
         }
     }
 }

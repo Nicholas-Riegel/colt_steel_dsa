@@ -11,6 +11,9 @@ public class Main {
         mbh.addLeaf(13);
 
         System.out.println(mbh.removeRoot());
+        System.out.println(mbh.removeRoot());
+        // System.out.println(mbh.removeRoot());
+        // System.out.println(mbh.removeRoot());
         System.out.println(mbh);
     }
 }
