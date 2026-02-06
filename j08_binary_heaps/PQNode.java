@@ -1,6 +1,7 @@
 package j08_binary_heaps;
 
 public class PQNode<T>{
+    
     T value;
     int priority;
 

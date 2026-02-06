@@ -9,7 +9,8 @@ public class PriorityQueue<T>{
 
     @Override
     public String toString(){
-        return minbhList.stream()
+        return minbhList
+            .stream()
             .map(node -> node.priority + ": " + node.value)
             .collect(Collectors.joining("\n")) + "\n";
     }
@@ -17,7 +18,7 @@ public class PriorityQueue<T>{
     public void enqueue(T value, int priority){
         PQNode<T> pqNode = new PQNode<T>(value, priority);
         minbhList.add(pqNode);
-        arrangeFromLeaf(minbhList.size() - 1);
+        bubbleUp(minbhList.size() - 1);
     }
 
     // Recursive solution
@@ -25,7 +26,7 @@ public class PriorityQueue<T>{
     // if child priority is less than parent
     // switch child and parent
     // then check again 
-    public void arrangeFromLeaf(int childIndex){
+    public void bubbleUp(int childIndex){
 
         // get parent index
         int parentIndex = (childIndex - 1)/2;
@@ -39,7 +40,7 @@ public class PriorityQueue<T>{
             // switch values
             swap(childIndex, parentIndex);
             // run again (parentIndex becomes new childIndex)
-            arrangeFromLeaf(parentIndex);
+            bubbleUp(parentIndex);
         }
     }
 
@@ -77,7 +78,7 @@ public class PriorityQueue<T>{
         PQNode<T> returnNode = minbhList.removeLast();
         
         // Rearrange
-        arrangeFromRoot(0);
+        sinkDown(0);
 
         // return removed value
         return returnNode;
@@ -85,7 +86,7 @@ public class PriorityQueue<T>{
 
     // Helper function for removeRoot()
     // Recursively rearrange heap
-    public void arrangeFromRoot(int parentIndex){
+    public void sinkDown(int parentIndex){
 
         // get child index
         Integer childIndex = lowestPriorityChildIndex(parentIndex);
@@ -93,7 +94,7 @@ public class PriorityQueue<T>{
         // guard
         if (childIndex == null) return;
         
-        // get values
+        // get priorities
         int parentPriority = minbhList.get(parentIndex).priority;
         int childPriority = minbhList.get(childIndex).priority;
 
@@ -102,12 +103,12 @@ public class PriorityQueue<T>{
             // swap parent and child values
             swap(parentIndex, childIndex);
             // run method again on new index
-            arrangeFromRoot(childIndex);
+            sinkDown(childIndex);
         }
     }
 
-    // Helper function for arrangeFromRoot()
-    // find index of lowest priority child or return null
+    // Helper function for sinkDown()
+    // find index of lowest (highest) priority child or return null
     public Integer lowestPriorityChildIndex(int parentIndex){
         
         // Get the child indexes
