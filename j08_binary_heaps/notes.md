@@ -25,23 +25,14 @@ The right child is at 2n + 2
 For any child node at index  n...
 Its parent is at index (n-1)/2 floored
 
-// Iterative solution
-// public void sortPostAdd(){
+HEAPS ARE USEFULE BECAUSE THEY HAVE A TIME COMPLEXITY OF O(log n) FOR INSERTING AND REMOVING ELEMENTS
 
-//     int indexChild = mbhArrayList.size() - 1;
-//     int indexParent = (indexChild - 1)/2;
-//     int parentValue = mbhArrayList.get(indexParent);
-//     int childValue = mbhArrayList.get(indexChild);
-        
-//     while (childValue > parentValue) {
+PRIORITY QUEUE?
 
-//         mbhArrayList.set(indexParent, childValue);
-//         mbhArrayList.set(indexChild, parentValue);
-            
-//         indexChild = indexParent;
-//         indexParent = (indexChild - 1)/2;
-            
-//         parentValue = mbhArrayList.get(indexParent);
-//         childValue = mbhArrayList.get(indexChild);
-//     }
-// }
+A data structure where each element has a priority. 
+Elements with higher priorities are served before elements with lower priorities.
+
+Write a Min Binary Heap - lower number means higher priority.
+Each Node has a val and a priority.  Use the priority to build the heap.
+Enqueue method accepts a value and priority, makes a new node, and puts it in the right spot based off of its priority.
+Dequeue method removes root element, returns it, and rearranges heap using priority.
