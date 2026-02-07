@@ -1,6 +1,6 @@
 package j09_hash_tables;
 
-public class Hash_Table {
+public class Hash_Functions {
 
     // function to reduce a string to a legitimate index in an array
     public static int hash1(String key, int arrayLength){

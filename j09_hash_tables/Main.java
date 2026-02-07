@@ -4,11 +4,13 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String[] list = {"pink", "blue", "red", "green", "white"};
-        for (String word : list){
-            // System.out.println(Hash_Table.hash1(word, 10));
-            System.out.println(Hash_Table.hash2(word, 10));
-            // not much of a difference because numbers are too small
-        }
+        HashTable ht = new HashTable();
+        ht.set("name", "John");
+        ht.set("age", "25");
+        ht.set("name", "Jane"); 
+        ht.set("email", "jane@email.com"); 
+        ht.set("company", "Jane"); 
+        
+        System.out.println(ht.valuesWithDuplicates());
     }
 }
