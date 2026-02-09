@@ -6,12 +6,14 @@ import java.util.stream.Collectors;
 
 public class HashTable {
 
-    ArrayList< ArrayList<KeyValuePair> > keyMap;
+    // main arrayList to store subarrayLists
+    private ArrayList< ArrayList<KeyValuePair> > keyMap;
     
+    // Internal class to make key value pair objects
     private static class KeyValuePair{
 
-        String key;
-        String value;
+        private String key;
+        private String value;
 
         KeyValuePair(String key, String value){
             this.key = key;
@@ -19,6 +21,8 @@ public class HashTable {
         }
     }
 
+    // toString method
+    // Time complexity O(n)
     @Override
     public String toString(){
         return keyMap
@@ -28,28 +32,37 @@ public class HashTable {
             .collect(Collectors.joining("\n"));
     }
 
-    HashTable(){
+    // Default constructor
+    public HashTable(){
         this(53);
     }
     
-    HashTable(int arrayLength){
+    // Constructor
+    // Time complexity: O(n)
+    public HashTable(int arrayLength){
         this.keyMap = new ArrayList<>();
         for (int i = 0; i < arrayLength; i++){
             keyMap.add(new ArrayList<>());
         }
     }
 
+    // Hash function to distrubute key value pairs randomly into array "buckets"
+    // Time complexity: O(1)
     public int _hash(String key) {
+        
         int total = 0;
-        int WEIRD_PRIME = 31;
+        int PRIME = 31;
+        
         for (int i = 0; i < Math.min(key.length(), 100); i++) {
             char ch = key.charAt(i);
             int value = (int) ch - 96;
-            total = (total * WEIRD_PRIME + value) % this.keyMap.size();
+            total = (total * PRIME + value) % this.keyMap.size();
         }
         return total;
     }
 
+    // Set method to set key value pairs randomly into array buckets
+    // Time complexity: O(1) bc hopefully the buckets will be small
     public void set(String key, String value){
 
         int hashIndex = _hash(key);
@@ -66,6 +79,8 @@ public class HashTable {
         bucket.add(kvp);
     }
     
+    // get method
+    // Time complexity: O(1) bc hopefully the buckets will be small
     public String get(String key){
 
         int hashIndex = _hash(key);
@@ -80,6 +95,7 @@ public class HashTable {
     }
 
     // get all keys
+    // Time complexity: O(n) because dump
     public ArrayList<String> keys(){
         return keyMap
             .stream()
@@ -89,22 +105,30 @@ public class HashTable {
     }
 
     // get all values with duplicates
-    public ArrayList<String> valuesWithDuplicates(){
+    // Time complexity: O(n) because dump
+    public ArrayList<String> values(){
+        
         ArrayList<String> returnArray = new ArrayList<>();
-        keyMap.forEach(bucket -> 
-            bucket.forEach(kvp -> returnArray.add(kvp.value))
+        
+        keyMap.forEach(
+            bucket -> bucket.forEach(
+                kvp -> returnArray.add(kvp.value)
+            )
         );
         return returnArray;
     }
 
     // get all unique values
+    // Time complexity: O(n) because dump
     public HashSet<String> uniqueValues(){
-        HashSet<String> hashset = new HashSet<>();
-        keyMap.forEach(bucket -> 
-            bucket.forEach(kvp -> hashset.add(kvp.value))
+        
+        HashSet<String> hashSet = new HashSet<>();
+        
+        keyMap.forEach(
+            bucket -> bucket.forEach(
+                kvp -> hashSet.add(kvp.value)
+            )
         );
-        return hashset;
+        return hashSet;
     }
-
-
 }

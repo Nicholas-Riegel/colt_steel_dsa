@@ -11,6 +11,9 @@ public class Main {
         ht.set("email", "jane@email.com"); 
         ht.set("company", "Jane"); 
         
-        System.out.println(ht.valuesWithDuplicates());
+        System.out.println(ht);
+        System.out.println(ht.keys());
+        System.out.println(ht.values());
+        System.out.println(ht.uniqueValues());
     }
 }
