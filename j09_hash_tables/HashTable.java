@@ -48,7 +48,9 @@ public class HashTable {
 
     // Hash function to distrubute key value pairs randomly into array "buckets"
     // Time complexity: O(1)
-    public int _hash(String key) {
+    public Integer _hash(String key) {
+
+        if (key == null) return null; 
         
         int total = 0;
         int PRIME = 31;
@@ -63,7 +65,9 @@ public class HashTable {
 
     // Set method to set key value pairs randomly into array buckets
     // Time complexity: O(1) bc hopefully the buckets will be small
-    public void set(String key, String value){
+    public boolean set(String key, String value){
+
+        if (key == null) return false;
 
         int hashIndex = _hash(key);
         ArrayList<KeyValuePair> bucket = keyMap.get(hashIndex);
@@ -71,12 +75,13 @@ public class HashTable {
         for (KeyValuePair kvp : bucket){
             if (kvp.key.equals(key)){
                 kvp.value = value;
-                return;
+                return true;
             }
         }
 
         KeyValuePair kvp = new KeyValuePair(key, value);
         bucket.add(kvp);
+        return true;
     }
     
     // get method
