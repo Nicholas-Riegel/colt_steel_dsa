@@ -21,17 +21,6 @@ public class HashTable {
         }
     }
 
-    // toString method
-    // Time complexity O(n)
-    @Override
-    public String toString(){
-        return keyMap
-            .stream()
-            .flatMap(ArrayList::stream)
-            .map(kvp -> kvp.key + ": " + kvp.value)
-            .collect(Collectors.joining("\n"));
-    }
-
     // Default constructor
     public HashTable(){
         this(53);
@@ -135,5 +124,16 @@ public class HashTable {
             )
         );
         return hashSet;
+    }
+
+    // toString method
+    // Time complexity O(n)
+    @Override
+    public String toString(){
+        return keyMap
+            .stream()
+            .flatMap(ArrayList::stream)
+            .map(kvp -> kvp.key + ": " + kvp.value)
+            .collect(Collectors.joining("\n"));
     }
 }
