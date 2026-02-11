@@ -9,10 +9,10 @@ public class Main{
         al.addVertex("World");
         al.addEdge("Hello", "World");
         // al.removeEdge("Hello", "World");
-        al.removeVertex("World");
+        // al.removeVertex("World");
 
-        System.out.println(al.haveEdge("Hello", "World"));
-        System.out.println(al.getVertices());
+        // System.out.println(al.haveEdge("Hello", "World"));
+        // System.out.println(al.getVertices());
         System.out.println(al);
     }
 }

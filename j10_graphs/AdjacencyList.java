@@ -80,13 +80,26 @@ public class AdjacencyList{
     }
 
     // to string 
+    // @Override
+    // public String toString(){
+    //     return this.mainHashMapOfSets
+    //         .entrySet()
+    //         .stream()
+    //         .map(kvp -> kvp.getKey() + ": " + kvp.getValue())
+    //         .collect(Collectors.joining("\n"));
+    // }
+    
+    // to string 
     @Override
     public String toString(){
-        return this.mainHashMapOfSets
-            .entrySet()
-            .stream()
-            .map(kvp -> kvp.getKey() + ": " + kvp.getValue())
-            .collect(Collectors.joining("\n"));
-
+        StringBuffer sb = new StringBuffer();
+        boolean first = true;
+        for (String key : mainHashMapOfSets.keySet()){
+            if (!first) sb.append("\n"); // attaches a new line before each line
+            String line = key + ": " + mainHashMapOfSets.get(key);
+            sb.append(line);
+            first = false;
+        }
+        return sb.toString();
     }
 }
