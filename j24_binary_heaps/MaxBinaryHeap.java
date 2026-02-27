@@ -1,4 +1,4 @@
-package j08_binary_heaps;
+package j24_binary_heaps;
 
 import java.util.ArrayList;
 

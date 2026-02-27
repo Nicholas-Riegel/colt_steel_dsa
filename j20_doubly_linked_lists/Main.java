@@ -1,4 +1,4 @@
-package j05_doubly_linked_lists;
+package j20_doubly_linked_lists;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package j06_stacks_queues;
+package j21_stacks_queues;
 
 import java.util.ArrayList;
 

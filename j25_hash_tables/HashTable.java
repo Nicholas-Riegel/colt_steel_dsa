@@ -1,4 +1,4 @@
-package j09_hash_tables;
+package j25_hash_tables;
 
 import java.util.ArrayList;
 import java.util.HashSet;

@@ -1,4 +1,4 @@
-package j07_binary_search_trees;
+package j22_binary_search_trees;
 
 public class Main{
 

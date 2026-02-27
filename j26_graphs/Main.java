@@ -1,4 +1,4 @@
-package j10_graphs;
+package j26_graphs;
 
 public class Main{
 

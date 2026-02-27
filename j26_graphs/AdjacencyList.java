@@ -1,4 +1,4 @@
-package j10_graphs;
+package j26_graphs;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 public class AdjacencyList{
 
+    // main hashmap of sets
     private HashMap<String, HashSet<String>> mainHashMapOfSets;
     
     // constructor
@@ -67,7 +68,9 @@ public class AdjacencyList{
         
         if (!mainHashMapOfSets.containsKey(vertex)) return false;
 
-        for (String v : mainHashMapOfSets.get(vertex)) mainHashMapOfSets.get(v).remove(vertex);
+        for (String v : mainHashMapOfSets.get(vertex)){
+            mainHashMapOfSets.get(v).remove(vertex);
+        } 
         
         mainHashMapOfSets.remove(vertex);
         
@@ -92,12 +95,19 @@ public class AdjacencyList{
     // to string 
     @Override
     public String toString(){
+
         StringBuffer sb = new StringBuffer();
+        
         boolean first = true;
+        
         for (String key : mainHashMapOfSets.keySet()){
+        
             if (!first) sb.append("\n"); // attaches a new line before each line
+        
             String line = key + ": " + mainHashMapOfSets.get(key);
+        
             sb.append(line);
+        
             first = false;
         }
         return sb.toString();

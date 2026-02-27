@@ -1,4 +1,4 @@
-package j08_binary_heaps;
+package j24_binary_heaps;
 
 public class Main {
 
