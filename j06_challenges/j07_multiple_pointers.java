@@ -1,9 +1,5 @@
 package j06_challenges;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-
 public class j07_multiple_pointers{
 
     // Multiple Pointers - averagePair
@@ -39,37 +35,8 @@ public class j07_multiple_pointers{
     // Time Complexity - O(N + M)
     // Space Complexity - O(1)
 
-    // Ot(n), Os(n)
-    public static boolean isSubsequence1(String str1, String str2){
-
-        // guards
-        if (str1 == null || str2 == null) return false;
-        if (str1.length() == 0) return true;
-        
-        // convert strings to character arrays
-        char[] charArr1 = str1.toCharArray();
-        char[] charArr2 = str2.toCharArray();
-
-        // index for crawling through charArr1
-        int idx1 = 0;
-        
-        // for each letter in charArr1 go through charArr2 until you have a match
-        // then advance idx1 then continue in charArr2 until you have a match
-        for (char ch : charArr2){
-            
-            if (charArr1[idx1] == ch){
-                
-                if (idx1 < charArr1.length - 1) idx1++;
-                // if the last one has a match, return true
-                else return true;
-            }
-        }
-
-        return false;
-    }
-
     // Ot(n), Os(1)
-    public static boolean isSubsequence2(String str1, String str2){
+    public static boolean isSubsequence(String str1, String str2){
 
         // guards
         if (str1 == null || str2 == null) return false;
@@ -100,19 +67,12 @@ public class j07_multiple_pointers{
         // System.out.println(averagePair(new int[]{-1,0,3,4,5,6}, 4.1)); // false
         // System.out.println(averagePair(new int[]{}, 4)); // false
 
-        // System.out.println(isSubsequence1("hello", "hello world")); // true
-        // System.out.println(isSubsequence1("sing", "sting")); // true
-        // System.out.println(isSubsequence1("abc", "abracadabra")); // true
-        // System.out.println(isSubsequence1("abc", "acb")); // false (order matters)
-        // System.out.println(isSubsequence1("aab", "abac")); // false
-        // System.out.println(isSubsequence1("z", "abc")); // false
-        
-        System.out.println(isSubsequence2("hello", "hello world")); // true
-        System.out.println(isSubsequence2("sing", "sting")); // true
-        System.out.println(isSubsequence2("abc", "abracadabra")); // true
-        System.out.println(isSubsequence2("abc", "acb")); // false (order matters)
-        System.out.println(isSubsequence2("aab", "abac")); // false
-        System.out.println(isSubsequence2("z", "abc")); // false
+        System.out.println(isSubsequence("hello", "hello world")); // true
+        System.out.println(isSubsequence("sing", "sting")); // true
+        System.out.println(isSubsequence("abc", "abracadabra")); // true
+        System.out.println(isSubsequence("abc", "acb")); // false (order matters)
+        System.out.println(isSubsequence("aab", "abac")); // false
+        System.out.println(isSubsequence("z", "abc")); // false
 
     }
 }
