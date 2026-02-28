@@ -39,7 +39,8 @@ public class j07_multiple_pointers{
     // Time Complexity - O(N + M)
     // Space Complexity - O(1)
 
-    public static boolean isSubsequence(String str1, String str2){
+    // Ot(n), Os(n)
+    public static boolean isSubsequence1(String str1, String str2){
 
         // guards
         if (str1 == null || str2 == null) return false;
@@ -64,6 +65,29 @@ public class j07_multiple_pointers{
         return false;
     }
 
+    // Ot(n), Os(1)
+    public static boolean isSubsequence2(String str1, String str2){
+
+        // guards
+        if (str1 == null || str2 == null) return false;
+        if (str1.length() == 0) return true;
+        
+        int idx1 = 0;
+
+        for (int idx2 = 0; idx2 < str2.length(); idx2++){
+
+            if (str1.charAt(idx1) == str2.charAt(idx2)){
+            
+                if (idx1 < str1.length() - 1){
+                    idx1++;
+                }
+                else return true;
+            }
+        }
+
+        return false;
+    }
+
     public static void main(String[] args) {
                 
         // System.out.println(averagePair(new int[]{1,2,3}, 2.5)); // true
@@ -71,12 +95,12 @@ public class j07_multiple_pointers{
         // System.out.println(averagePair(new int[]{-1,0,3,4,5,6}, 4.1)); // false
         // System.out.println(averagePair(new int[]{}, 4)); // false
 
-        System.out.println(isSubsequence("hello", "hello world")); // true
-        System.out.println(isSubsequence("sing", "sting")); // true
-        System.out.println(isSubsequence("abc", "abracadabra")); // true
-        System.out.println(isSubsequence("abc", "acb")); // false (order matters)
-        System.out.println(isSubsequence("aab", "abac")); // false
-        System.out.println(isSubsequence("z", "abc")); // false
+        System.out.println(isSubsequence2("hello", "hello world")); // true
+        System.out.println(isSubsequence2("sing", "sting")); // true
+        System.out.println(isSubsequence2("abc", "abracadabra")); // true
+        System.out.println(isSubsequence2("abc", "acb")); // false (order matters)
+        System.out.println(isSubsequence2("aab", "abac")); // false
+        System.out.println(isSubsequence2("z", "abc")); // false
 
     }
 }
